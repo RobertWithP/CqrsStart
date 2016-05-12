@@ -6,7 +6,7 @@ namespace CQRSStart
 	{
 		static void Main(string[] args)
 		{
-			Console.WriteLine("Available commands: Get, Quit");
+			Console.WriteLine("Available commands: AddNew, Quit");
 
 			while (true)
 			{
@@ -28,18 +28,12 @@ namespace CQRSStart
 		{
 			switch (command.Trim().ToLower())
 			{
-				case "get":
-					GetAllData();
+				case "addnew":
+					
 					return;
 				default:
 					return;		
 			}			
-		}
-
-		private static void GetAllData()
-		{
-			Console.WriteLine("Call --> Get all data.");
-
 		}
 
 		private static bool IsQuitCommand(string command)
