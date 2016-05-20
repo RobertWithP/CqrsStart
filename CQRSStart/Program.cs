@@ -1,44 +1,71 @@
-﻿using System;
-
-namespace CQRSStart
+﻿namespace CQRSStart
 {
+	using System.Collections.Generic;
+
+	using CQRSStart.CommandInfrastructure;
+	using CQRSStart.Commands;
+
+	using System;
+
 	class Program
 	{
+		private static CommandDispatcher commandDispatcher;
+
 		static void Main(string[] args)
 		{
+			InitSystem();
+
 			Console.WriteLine("Available commands: AddNew, Quit");
 
 			while (true)
 			{
 				string command = Console.ReadLine();
 
-				if (IsQuitCommand(command))
+				if (IsQuitCall(command))
 				{
 					Console.WriteLine("Quit is called. Shutdown system ....");
 					break;
 				}
 
-				RunCommand(command);
+				ParseAndRunCommand(command);
 			}
 
 			Console.ReadKey();
 		}
 
-		private static void RunCommand(string command)
+		private static void InitSystem()
+		{
+			var commandHandler = new Dictionary<string, ICommandHandler<ICommand>>();
+		
+			// add all commandhandler from hand
+			commandHandler.Add(typeof(AddNewCommand).Name, new AddNewCommandHandler());
+			
+			commandDispatcher = new CommandDispatcher(commandHandler);
+		}
+
+		private static bool IsQuitCall(string command)
+		{
+			return command.Equals("quit", StringComparison.OrdinalIgnoreCase);
+		}
+
+		private static void ParseAndRunCommand(string command)
 		{
 			switch (command.Trim().ToLower())
 			{
 				case "addnew":
-					
+					AddNew();
 					return;
 				default:
 					return;		
 			}			
 		}
 
-		private static bool IsQuitCommand(string command)
+		/// <summary>
+		/// Add new "thing" to the system.
+		/// </summary>
+		private static void AddNew()
 		{
-			return command.Equals("quit", StringComparison.OrdinalIgnoreCase);
+			commandDispatcher.Execute(new AddNewCommand());
 		}
 	}
 }
