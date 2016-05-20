@@ -38,7 +38,7 @@
 			var commandHandler = new Dictionary<string, ICommandHandler<ICommand>>();
 		
 			// add all commandhandler from hand
-			commandHandler.Add(typeof(AddNewCommand).Name, new AddNewCommandHandler());
+			commandHandler.Add(typeof(AddNew).Name, new AddNewCommandHandler());
 			
 			commandDispatcher = new CommandDispatcher(commandHandler);
 		}
@@ -65,7 +65,7 @@
 		/// </summary>
 		private static void AddNew()
 		{
-			commandDispatcher.Execute(new AddNewCommand());
+			commandDispatcher.Execute(new AddNew());
 		}
 	}
 }

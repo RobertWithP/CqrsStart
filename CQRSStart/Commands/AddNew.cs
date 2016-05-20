@@ -2,7 +2,7 @@
 {
 	using CQRSStart.CommandInfrastructure;
 
-	public class AddNewCommand : ICommand
+	public class AddNew : ICommand
 	{		 
 	}
 }
