@@ -4,7 +4,7 @@
 
 	using CQRSStart.CommandInfrastructure;
 
-	public class AddNewCommandHandler : ICommandHandler<AddNew>
+	public class AddNewHandler : ICommandHandler<AddNew>
 	{
 		public void Execute(ICommand command)
 		{

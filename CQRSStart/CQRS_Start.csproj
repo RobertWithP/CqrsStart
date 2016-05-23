@@ -64,7 +64,7 @@
     <Compile Include="CommandInfrastructure\ICommandDispatcher.cs" />
     <Compile Include="CommandInfrastructure\ICommandHandler.cs" />
     <Compile Include="Commands\AddNew.cs" />
-    <Compile Include="Commands\AddNewCommandHandler.cs" />
+    <Compile Include="Commands\AddNewHandler.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
