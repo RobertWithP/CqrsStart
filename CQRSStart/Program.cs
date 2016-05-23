@@ -6,6 +6,11 @@
 	using CQRSStart.Commands;
 
 	using System;
+	using System.Collections;
+
+	using CQRSStart.Model;
+	using CQRSStart.Queries;
+	using CQRSStart.QueryInfrastructure;
 
 	using TypeC;
 
@@ -13,11 +18,13 @@
 	{
 		private static CommandDispatcher commandDispatcher;
 
+		private static QueryDispatcher queryDispatcher;
+
 		static void Main(string[] args)
 		{
 			InitSystem();
 
-			Console.WriteLine("Available commands: AddNew, Quit");
+			Console.WriteLine("Available commands: AddNew, GetAll, Quit");
 
 			while (true)
 			{
@@ -38,9 +45,15 @@
 		private static void InitSystem()
 		{
 			TypeContainer typeC = TypeContainer.Instance;
+
+			// register command handler
 			typeC.Register<ICommandHandler<AddNew>, AddNewHandler>();
 			
+			// register query handler
+			typeC.Register<IQueryHandler<GetAllThings, IEnumerable<Thing>>, GetAllThingsHandler>();
+
 			commandDispatcher = new CommandDispatcher();
+			queryDispatcher = new QueryDispatcher();
 		}
 
 		private static bool IsQuitCall(string command)
@@ -55,9 +68,23 @@
 				case "addnew":
 					AddNew();
 					return;
+				case "getall":
+					GetAll();
+					return;
 				default:
 					return;		
 			}			
+		}
+
+		private static void GetAll()
+		{
+			Console.WriteLine("Query for all things:");
+
+			var result = queryDispatcher.Execute<GetAllThings, IEnumerable<Thing>>(new GetAllThings());
+			foreach (var thing in result)
+			{
+				Console.WriteLine(thing.ToString());
+			}
 		}
 
 		/// <summary>

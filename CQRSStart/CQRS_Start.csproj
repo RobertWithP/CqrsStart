@@ -69,8 +69,15 @@
     <Compile Include="CommandInfrastructure\ICommandHandler.cs" />
     <Compile Include="Commands\AddNew.cs" />
     <Compile Include="Commands\AddNewHandler.cs" />
+    <Compile Include="Model\Thing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\GetAllThings.cs" />
+    <Compile Include="Queries\GetAllThingsHandler.cs" />
+    <Compile Include="QueryInfrastructure\IQuery.cs" />
+    <Compile Include="QueryInfrastructure\IQueryDispatcher.cs" />
+    <Compile Include="QueryInfrastructure\IQueryHandler.cs" />
+    <Compile Include="QueryInfrastructure\QueryDispatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
