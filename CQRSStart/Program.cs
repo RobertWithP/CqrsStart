@@ -38,7 +38,7 @@
 			var commandHandler = new Dictionary<string, ICommandHandler<ICommand>>();
 		
 			// add all commandhandler from hand
-			commandHandler.Add(typeof(AddNew).Name, new AddNewCommandHandler());
+			commandHandler.Add(typeof(AddNew).Name, new AddNewHandler());
 			
 			commandDispatcher = new CommandDispatcher(commandHandler);
 		}
