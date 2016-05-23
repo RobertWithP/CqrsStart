@@ -7,6 +7,8 @@
 
 	using System;
 
+	using TypeC;
+
 	class Program
 	{
 		private static CommandDispatcher commandDispatcher;
@@ -35,12 +37,10 @@
 
 		private static void InitSystem()
 		{
-			var commandHandler = new Dictionary<string, ICommandHandler<ICommand>>();
-		
-			// add all commandhandler from hand
-			commandHandler.Add(typeof(AddNew).Name, new AddNewHandler());
+			TypeContainer typeC = TypeContainer.Instance;
+			typeC.Register<ICommandHandler<AddNew>, AddNewHandler>();
 			
-			commandDispatcher = new CommandDispatcher(commandHandler);
+			commandDispatcher = new CommandDispatcher();
 		}
 
 		private static bool IsQuitCall(string command)

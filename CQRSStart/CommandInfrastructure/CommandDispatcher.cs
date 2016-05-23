@@ -1,16 +1,16 @@
 ﻿namespace CQRSStart.CommandInfrastructure
 {
 	using System;
-	using System.Collections.Generic;
+
+	using TypeC;
 
 	public class CommandDispatcher : ICommandDispatcher
 	{
+		private readonly TypeContainer instanceResolver;
 
-		private readonly Dictionary<string, ICommandHandler<ICommand>> commandHandlers;
-
-		public CommandDispatcher(Dictionary<string, ICommandHandler<ICommand>> commandHandlers)
+		public CommandDispatcher()
 		{
-			this.commandHandlers = commandHandlers;
+			this.instanceResolver = TypeContainer.Instance;
 		}
 
 		public void Execute<TCommand>(TCommand command) where TCommand : ICommand
@@ -20,12 +20,14 @@
 				throw new ArgumentNullException("command");
 			}
 
-			if (!commandHandlers.ContainsKey(command.GetType().Name))
-			{
-				throw new KeyNotFoundException(command.GetType().ToString());
-			}
+			var handler = this.instanceResolver.GetInstance<ICommandHandler<TCommand>>();
 
-			commandHandlers[command.GetType().Name].Execute(command);
+			if (handler == null)
+			{
+				throw new ArgumentException(typeof(TCommand).ToString());
+			}
+			
+			handler.Execute(command);
 		}
 	}
 }
