@@ -6,9 +6,7 @@
 	using CQRSStart.Commands;
 
 	using System;
-	using System.Collections;
 
-	using CQRSStart.Model;
 	using CQRSStart.Queries;
 	using CQRSStart.QueryInfrastructure;
 
@@ -47,10 +45,10 @@
 			TypeContainer typeC = TypeContainer.Instance;
 
 			// register command handler
-			typeC.Register<ICommandHandler<AddNew>, AddNewHandler>();
+			typeC.Register<IHandleCommand<AddNew>, AddNewHandler>();
 			
 			// register query handler
-			typeC.Register<IQueryHandler<GetAllThings, IEnumerable<Thing>>, GetAllThingsHandler>();
+			typeC.Register<IQueryHandler<GetAllThings, IEnumerable<Model.Thing>>, GetAllThingsHandler>();
 
 			commandDispatcher = new CommandDispatcher();
 			queryDispatcher = new QueryDispatcher();
@@ -80,7 +78,7 @@
 		{
 			Console.WriteLine("Query for all things:");
 
-			var result = queryDispatcher.Execute<GetAllThings, IEnumerable<Thing>>(new GetAllThings());
+			var result = queryDispatcher.Execute<GetAllThings, IEnumerable<Model.Thing>>(new GetAllThings());
 			foreach (var thing in result)
 			{
 				Console.WriteLine(thing.ToString());

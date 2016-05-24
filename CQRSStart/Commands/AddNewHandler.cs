@@ -4,9 +4,9 @@
 
 	using CQRSStart.CommandInfrastructure;
 
-	public class AddNewHandler : ICommandHandler<AddNew>
+	public class AddNewHandler : IHandleCommand<AddNew>
 	{
-		public void Execute(ICommand command)
+		public void Execute(AddNew command)
 		{
 			Console.WriteLine("AddNew is called....");
 		}

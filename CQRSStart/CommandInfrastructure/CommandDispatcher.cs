@@ -13,14 +13,14 @@
 			this.instanceResolver = TypeContainer.Instance;
 		}
 
-		public void Execute<TCommand>(TCommand command) where TCommand : ICommand
+		public void Execute<TCommand>(TCommand command)
 		{
 			if (command == null)
 			{
 				throw new ArgumentNullException("command");
 			}
 
-			var handler = this.instanceResolver.GetInstance<ICommandHandler<TCommand>>();
+			var handler = this.instanceResolver.GetInstance<IHandleCommand<TCommand>>();
 
 			if (handler == null)
 			{

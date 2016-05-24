@@ -64,9 +64,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CommandInfrastructure\CommandDispatcher.cs" />
-    <Compile Include="CommandInfrastructure\ICommand.cs" />
     <Compile Include="CommandInfrastructure\ICommandDispatcher.cs" />
-    <Compile Include="CommandInfrastructure\ICommandHandler.cs" />
+    <Compile Include="CommandInfrastructure\IHandleCommand.cs" />
     <Compile Include="Commands\AddNew.cs" />
     <Compile Include="Commands\AddNewHandler.cs" />
     <Compile Include="Model\Thing.cs" />
