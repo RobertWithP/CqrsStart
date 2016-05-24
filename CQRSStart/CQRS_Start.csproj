@@ -66,8 +66,6 @@
     <Compile Include="CommandInfrastructure\CommandDispatcher.cs" />
     <Compile Include="CommandInfrastructure\ICommandDispatcher.cs" />
     <Compile Include="CommandInfrastructure\IHandleCommand.cs" />
-    <Compile Include="Commands\AddNew.cs" />
-    <Compile Include="Commands\AddNewHandler.cs" />
     <Compile Include="Model\Thing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -77,6 +75,8 @@
     <Compile Include="QueryInfrastructure\IQueryDispatcher.cs" />
     <Compile Include="QueryInfrastructure\IQueryHandler.cs" />
     <Compile Include="QueryInfrastructure\QueryDispatcher.cs" />
+    <Compile Include="Thing\NewThing.cs" />
+    <Compile Include="Thing\ThingAggregate.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

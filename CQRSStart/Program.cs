@@ -3,12 +3,12 @@
 	using System.Collections.Generic;
 
 	using CQRSStart.CommandInfrastructure;
-	using CQRSStart.Commands;
 
 	using System;
 
 	using CQRSStart.Queries;
 	using CQRSStart.QueryInfrastructure;
+	using CQRSStart.Thing;
 
 	using TypeC;
 
@@ -45,7 +45,7 @@
 			TypeContainer typeC = TypeContainer.Instance;
 
 			// register command handler
-			typeC.Register<IHandleCommand<AddNew>, AddNewHandler>();
+			typeC.Register<IHandleCommand<NewThing>, ThingAggregate>();
 			
 			// register query handler
 			typeC.Register<IQueryHandler<GetAllThings, IEnumerable<Model.Thing>>, GetAllThingsHandler>();
@@ -90,7 +90,7 @@
 		/// </summary>
 		private static void AddNew()
 		{
-			commandDispatcher.Execute(new AddNew());
+			commandDispatcher.Execute(new NewThing());
 		}
 	}
 }
