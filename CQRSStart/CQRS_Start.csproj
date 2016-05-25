@@ -63,9 +63,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CommandInfrastructure\CommandDispatcher.cs" />
-    <Compile Include="CommandInfrastructure\ICommandDispatcher.cs" />
-    <Compile Include="CommandInfrastructure\IHandleCommand.cs" />
+    <Compile Include="Infrastructure\MessageDispatcher.cs" />
+    <Compile Include="Infrastructure\IMessageDispatcher.cs" />
+    <Compile Include="Infrastructure\IHandleCommand.cs" />
+    <Compile Include="Events\ThingCreated.cs" />
+    <Compile Include="Infrastructure\Aggregate.cs" />
+    <Compile Include="Infrastructure\ISubscribeTo.cs" />
     <Compile Include="Model\Thing.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

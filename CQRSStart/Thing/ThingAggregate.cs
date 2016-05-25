@@ -1,14 +1,18 @@
 ﻿namespace CQRSStart.Thing
 {
 	using System;
+	using System.Collections;
 
 	using CQRSStart.CommandInfrastructure;
+	using CQRSStart.Events;
+	using CQRSStart.Infrastructure;
 
-	public class ThingAggregate : IHandleCommand<NewThing>
+	public class ThingAggregate : Aggregate, IHandleCommand<NewThing>
 	{
-		public void Execute(NewThing command)
+		public IEnumerable Execute(NewThing command)
 		{
 			Console.WriteLine("NewThing is called ...");
+			yield return new ThingCreated();
 		}
 	}
 }

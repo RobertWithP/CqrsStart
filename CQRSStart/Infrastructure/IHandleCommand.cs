@@ -1,7 +1,9 @@
 ﻿namespace CQRSStart.CommandInfrastructure
 {
+	using System.Collections;
+
 	public interface IHandleCommand<TCommand>
 	{	
-		void Execute(TCommand command);
+		IEnumerable Execute(TCommand command);
 	}
 }

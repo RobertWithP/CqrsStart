@@ -6,15 +6,17 @@
 
 	using System;
 
+	using CQRSStart.Events;
+	using CQRSStart.Infrastructure;
 	using CQRSStart.Queries;
 	using CQRSStart.QueryInfrastructure;
 	using CQRSStart.Thing;
 
 	using TypeC;
 
-	class Program
+	class Program  : ISubscribeTo<ThingCreated>
 	{
-		private static CommandDispatcher commandDispatcher;
+		private static MessageDispatcher commandDispatcher;
 
 		private static QueryDispatcher queryDispatcher;
 
@@ -47,10 +49,13 @@
 			// register command handler
 			typeC.Register<IHandleCommand<NewThing>, ThingAggregate>();
 			
+			// register event handler
+			typeC.Register<ISubscribeTo<ThingCreated>, Program>();
+
 			// register query handler
 			typeC.Register<IQueryHandler<GetAllThings, IEnumerable<Model.Thing>>, GetAllThingsHandler>();
 
-			commandDispatcher = new CommandDispatcher();
+			commandDispatcher = new MessageDispatcher();
 			queryDispatcher = new QueryDispatcher();
 		}
 
@@ -90,7 +95,12 @@
 		/// </summary>
 		private static void AddNew()
 		{
-			commandDispatcher.Execute(new NewThing());
+			commandDispatcher.ExecuteCommand(new NewThing());
+		}
+
+		public void Handle(ThingCreated e)
+		{
+			Console.WriteLine("A thing was created!");
 		}
 	}
 }
